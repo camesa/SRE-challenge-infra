@@ -1,0 +1,63 @@
+name: Update Kubernetes Manifests
+
+on:
+  workflow_dispatch:
+    inputs:
+      imageTag:
+        description: 'Tag de imagen de Docker a actualizar'
+        required: true
+
+env:
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+
+jobs:
+  update_manifests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: camesa/voting-app-k8s
+        token: ${{ secrets.K8S_ACCESS_TOKEN }}
+    - name: Update Kubernetes manifests
+      run: |
+        for service in vote result worker; do
+          sed -i "s|image: $DOCKER_HUB_USERNAME/$service:.*|image: $DOCKER_HUB_USERNAME/$service:${{ github.event.inputs.imageTag }}|g" k8s-manifests/$service.yaml
+        done
+    - name: Commit and push changes
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add k8s-manifests/*.yaml
+        git commit -m "Actualizar imágenes a ${{ github.event.inputs.imageTag }}"
+        git pushname: Update Kubernetes Manifests
+
+on:
+  workflow_dispatch:
+    inputs:
+      imageTag:
+        description: 'Tag de imagen de Docker a actualizar'
+        required: true
+
+env:
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+
+jobs:
+  update_manifests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: camesa/voting-app-k8s
+        token: ${{ secrets.K8S_ACCESS_TOKEN }}
+    - name: Update Kubernetes manifests
+      run: |
+        for service in vote result worker; do
+          sed -i "s|image: $DOCKER_HUB_USERNAME/$service:.*|image: $DOCKER_HUB_USERNAME/$service:${{ github.event.inputs.imageTag }}|g" k8s-manifests/$service.yaml
+        done
+    - name: Commit and push changes
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add k8s-manifests/*.yaml
+        git commit -m "Actualizar imágenes a ${{ github.event.inputs.imageTag }}"
+        git push
