@@ -1,32 +1,33 @@
-name: Update Kubernetes Manifests
+name: Actualizar Manifiestos de Kubernetes
 
 on:
   workflow_dispatch:
     inputs:
-      imageTag:
-        description: 'Tag de imagen de Docker a actualizar'
+      version:
+        description: "Versión para actualizar en los manifiestos"
         required: true
 
-env:
-  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-
 jobs:
-  update_manifests:
+  actualizar-manifiestos:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        repository: camesa/voting-app-k8s
-        token: ${{ secrets.K8S_ACCESS_TOKEN }}
-    - name: Update Kubernetes manifests
-      run: |
-        for service in vote result worker; do
-          sed -i "s|image: $DOCKER_HUB_USERNAME/$service:.*|image: $DOCKER_HUB_USERNAME/$service:${{ github.event.inputs.imageTag }}|g" k8s-manifests/$service.yaml
-        done
-    - name: Commit and push changes
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add k8s-manifests/*.yaml
-        git commit -m "Actualizar imágenes a ${{ github.event.inputs.imageTag }}"
-        git pushname: Actualizar manifests de k8s
+      - name: Checkout repositorio de manifiestos
+        uses: actions/checkout@v3
+        with:
+          repository: camesa/voting-app-k8s
+          token: ${{ secrets.K8S_ACCESS_TOKEN }}
+
+      - name: Actualizar manifiestos
+        run: |
+          for file in k8s-manifests/*.yaml; do
+            servicio=$(basename "$file" .yaml)
+            sed -i 's|camesa/voting-app-'"$servicio"':.*|camesa/voting-app-'"$servicio"':${{ github.event.inputs.version }}|g' "$file"
+          done
+
+      - name: Commit y push de los cambios
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Actualizar versiones de imágenes a ${{ github.event.inputs.version }}"
+          git push
