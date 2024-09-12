@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: ["main"]
 
+# Añadir permisos necesarios
+permissions:
+  contents: write
+
 jobs:
   build-y-push:
     runs-on: ubuntu-latest
