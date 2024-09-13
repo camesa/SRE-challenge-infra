@@ -2,6 +2,33 @@
 
 Este repositorio contiene la infraestructura y workflows de CI para la aplicación voting-app.
 
+# SRE-challenge-infra
+
+Este repositorio contiene la infraestructura y los workflows de Integración Continua (CI) para la aplicación de votación (voting-app).
+
+## Estructura del Repositorio
+
+[La estructura del repositorio permanece igual]
+
+## Requerimientos Previos
+
+1. **Git**: Instalado localmente
+
+2. **DockerHub**:
+   - Cuenta en Docker Hub para almacenar las imágenes.
+
+3. **Acceso a GitHub**:
+   - Cuenta de GitHub con acceso a este repositorio.
+   - Permisos para crear y gestionar secretos en el repositorio.
+
+4. **Secretos de GitHub configurados**:
+   - `DOCKER_HUB_USERNAME`: Tu nombre de usuario de Docker Hub.
+   - `DOCKER_HUB_ACCESS_TOKEN`: Tu token de acceso a Docker Hub.
+   - `K8S_ACCESS_TOKEN`: Token de acceso para el repositorio de manifiestos de Kubernetes.
+
+5. **Acceso al repositorio de manifiestos**:
+   - Permisos de escritura en el repositorio `camesa/voting-app-k8s` para actualizar los manifiestos.
+
 ## Workflows de CI
 
 ### 1. Build y Push de Imágenes Docker (ci.yml)
