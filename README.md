@@ -14,9 +14,9 @@ Este repositorio contiene el código y workflows de CI para la aplicación votin
    - Permisos para crear y gestionar secretos en el repositorio.
 
 4. **Secretos de GitHub configurados**:
-   - `DOCKER_HUB_USERNAME`: Tu nombre de usuario de Docker Hub.
-   - `DOCKER_HUB_ACCESS_TOKEN`: Tu token de acceso a Docker Hub.
-   - `K8S_ACCESS_TOKEN`: Token de acceso para el repositorio de manifiestos de Kubernetes.
+   - `DOCKER_HUB_USERNAME`: Usuario de Docker Hub.
+   - `DOCKER_HUB_ACCESS_TOKEN`: Token de acceso a Docker Hub.
+   - `K8S_ACCESS_TOKEN`: Token de acceso para el repositorio de manifiestos de Kubernetes (https://github.com/camesa/voting-app-k8s).
 
 5. **Acceso al repositorio de manifiestos**:
    - Permisos de escritura en el repositorio `camesa/voting-app-k8s` para actualizar los manifiestos.
