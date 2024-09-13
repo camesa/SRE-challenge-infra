@@ -48,5 +48,5 @@ jobs:
           git tag ${{ steps.version.outputs.VERSION }}
           git push origin ${{ steps.version.outputs.VERSION }}
 
-      - name: Imprimir nueva versión
+      - name: Mostrar nueva versión
         run: 'echo "Nueva versión creada: ${{ steps.version.outputs.VERSION }}"'
