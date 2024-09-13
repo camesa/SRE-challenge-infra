@@ -1,6 +1,6 @@
 # SRE-challenge-infra
 
-Este repositorio contiene la infraestructura y workflows de CI para la aplicación voting-app.
+Este repositorio contiene el código y workflows de CI para la aplicación voting-app.
 
 ## Requerimientos Previos
 
