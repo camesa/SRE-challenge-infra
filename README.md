@@ -2,14 +2,6 @@
 
 Este repositorio contiene la infraestructura y workflows de CI para la aplicación voting-app.
 
-# SRE-challenge-infra
-
-Este repositorio contiene la infraestructura y los workflows de Integración Continua (CI) para la aplicación de votación (voting-app).
-
-## Estructura del Repositorio
-
-[La estructura del repositorio permanece igual]
-
 ## Requerimientos Previos
 
 1. **Git**: Instalado localmente
